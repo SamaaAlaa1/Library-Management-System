@@ -13,7 +13,7 @@ body {
     align-items: center;
 }
 
-#login-container {
+#signup-container {
     text-align: center;
     max-width: 400px;
     width: 100%;
@@ -26,15 +26,16 @@ body {
     margin-bottom: 30px;
 }
 
-#login-form {
+#signup-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
 }
 
-#login-form input[type="email"],
-#login-form input[type="password"] {
+#signup-form input[type="email"],
+#signup-form input[type="text"],
+#signup-form input[type="password"] {
     background-color: whitesmoke;
     border: none;
     border-radius: 8px;
@@ -43,31 +44,17 @@ body {
     max-width: 250px;
 }
 
-#forgot {
+#agree {
     font-size: 12px;
     color: white;
+}
+
+#agree a {
+    color: #fec63d;
     text-decoration: none;
-    align-self: center;
-
 }
 
-#rem {
-    font-size: 12px;
-    color: white;
-}
-
-#rem label {
-    margin-left: 5px;
-}
-
-#buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-#login,
-#signup {
+#signup-button {
     background-color: #fec63d;
     color: white;
     font-weight: bold;
@@ -75,23 +62,18 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-#noacc {
+#acc {
     font-size: 12px;
     margin-top: 15px;
     color: white;
 }
 
-#noacc a {
+#acc a {
     color: #fec63d;
     text-decoration: none;
 }
 
-#circle1 {
-    background-color: #fec63d;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 40px auto 0;
-}
+
