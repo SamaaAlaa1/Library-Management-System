@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login Page</title>
-    <link rel="stylesheet" href="login.css">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div id="login-container">
-        <h3 id="welcome">Welcome to WEBSITE</h3>
-        <form action="action_page.php" method="post" id="login-form">
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            
-            <a href="#" id="forgot">Forgot your password?</a>
+<div id="login-container">
+  <h3 id="welcome">Welcome to WEBSITE</h3>
+  <form action="#" method="post" id="login-form">
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-            <div id="rem">
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Remember me</label>
-            </div>
+    <a href="#" id="forgot">Forgot your password?</a>
 
-            <div id="buttons">
-                <button type="submit" id="login">Login</button>
-                <button type="button" id="signup" onclick="location.href='/signup'">Sign Up</button>
-            </div>
-
-            <p id="noacc">Don't have an account? <a href="#">Sign up now</a></p>
-        </form>
+    <div id="rem">
+      <input type="checkbox" id="remember" name="remember">
+      <label for="remember">Remember me</label>
     </div>
+
+    <div id="buttons">
+      <button type="submit" id="login">Login</button>
+    </div>
+
+    <p id="noacc">Don't have an account? <a href="signup.html">Sign up now</a></p>
+  </form>
+</div>
+<script src="storage.js"></script>
+<script src="login.js" ></script>
+
 </body>
 </html>
