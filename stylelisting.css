@@ -17,6 +17,7 @@
         
 }
 .Book-Grid button{
+    color: aliceblue;
     width: 100px;
     height: 40px;
    margin-top: 12px;
@@ -26,7 +27,7 @@
    font-size: 15px;
    align-self: center;
    cursor: pointer;
-   background-color: #fec63d;
+   background-color:#5ab2a6;
 }
 footer{
     display: flex;
@@ -34,10 +35,11 @@ footer{
     gap:10px;
 }
 .circlebtn{
+    color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #dfbc63;
+    background-color: #5ab2a6;
     border: none;
     display: flex;
     justify-content: center;
@@ -54,20 +56,37 @@ footer{
     font-size: 26px;
 }
 body{
-    background-color: #5ab2a6;
+    background-color: white;
 }
-h6{
-    font-size: 17px;
-    background-color: #fec63d;
-    margin-top: -5px;
-}
+
 .search-bar{
+    margin-top: 10px;
     width: 200px;
-    height: 25px;
+    height: 35px;
     padding: 10px;
     border-radius: 20px;
     border: #5ab2a6;
-    background-color: #eaca79;
+    background-color:#5ab2a6;
     
 
+}
+input::placeholder{
+    color:antiquewhite;
+}
+.header{
+    margin-top: -7px;
+    display: flex;
+    gap: 20px;
+    background: #5ab2a6;
+    align-self: center;
+    align-items: center;
+}
+.header img{
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+.header span{
+    font-size: 17px;
+    color: aliceblue;
 }
