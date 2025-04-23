@@ -38,10 +38,63 @@ function saveBorrowedBooks(userBooks){}// Saves the updated list of borrowed boo
 
 function updateBorrowedBooks(action, book){}// Updates the borrowed books list by adding or removing a book based on the action
 
-function getFavouriteBooks(){}// Retrieves the list of favorite books for the current user from localStorage
+function getFavouriteBooks(){
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) return []; 
 
-function saveFavouriteBooks(userBooks){}// Saves the updated list of favorite books for the current user to localStorage
-function updateFavouriteBooks(action, book){}// Updates the favorite books list by adding or removing a book based on the action
+    const data = localStorage.getItem(`favourites_${currentUser}`);
+    return data ? JSON.parse(data) : [];
+
+}// Retrieves the list of favorite books for the current user from localStorage
+
+function saveFavouriteBooks(userBooks){
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) return; 
+
+    localStorage.setItem(`favourites_${currentUser}`, JSON.stringify(userBooks));
+}
+
+// Saves the updated list of favorite books for the current user to localStorage
+function updateFavouriteBooks(action, book){
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("fav-btn")) {
+      const bookDiv = e.target.closest(".book");
+      const bookId = bookDiv.dataset.id;
+      const bookImg = bookDiv.querySelector("img").src;
+
+      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+      const index = favourites.findIndex(book => book.id === bookId);
+
+      if (index === -1) {
+        favourites.push({ id: bookId, img: bookImg });
+        e.target.textContent = "Remove from Favourites";
+        alert("Book added to favourites!");
+      } else {
+        favourites.splice(index, 1);
+        e.target.textContent = "Add to Favourites";
+        alert("Book removed from favourites!");
+      }
+
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+    }
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    document.querySelectorAll(".book").forEach(book => {
+      const bookId = book.dataset.id;
+      const isFav = favourites.find(b => b.id === bookId);
+      const btn = book.querySelector(".fav-btn");
+      if (isFav) {
+        btn.textContent = "Remove from Favourites";
+      } else {
+        btn.textContent = "Add to Favourites";
+      }
+    });
+  });
+}
+
 function getBookStatus(bookid){
     let books = getBooks();
     let book = books.find(b=>b.id === bookid);
