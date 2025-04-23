@@ -56,15 +56,15 @@ footer{
     font-size: 26px;
 }
 body{
-    background-color: white;
+    background-color: rgb(243, 243, 223);
 }
 
 .search-bar{
     margin-top: 10px;
     width: 200px;
-    height: 35px;
+    height: 40px;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: #5ab2a6;
     background-color:#5ab2a6;
     
@@ -80,13 +80,18 @@ input::placeholder{
     background: #5ab2a6;
     align-self: center;
     align-items: center;
+    padding: 15px 40px;
+    border-radius: 10px;
+    
 }
 .header img{
     width: 28px;
     height: 28px;
     cursor: pointer;
 }
-.header span{
-    font-size: 17px;
-    color: aliceblue;
+.header a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
 }
