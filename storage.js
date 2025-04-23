@@ -32,9 +32,20 @@ function saveUsers(users){
 
 }// Saves the list of all users to localStorage
 
-function getBorrowedBooks(){}// Retrieves the list of borrowed books for the current user from localStorage
+function getBorrowedBooks(){
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) return []; 
 
-function saveBorrowedBooks(userBooks){}// Saves the updated list of borrowed books for the current user to localStorage
+    const data = localStorage.getItem(`borrowedBooks_${currentUser}`);
+    return data ? JSON.parse(data) : [];
+}// Retrieves the list of borrowed books for the current user from localStorage
+
+function saveBorrowedBooks(userBooks){
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) return; 
+
+    localStorage.setItem(`borrowedBooks_${currentUser}`, JSON.stringify(userBooks));
+}// Saves the updated list of borrowed books for the current user to localStorage
 
 function updateBorrowedBooks(action, book){}// Updates the borrowed books list by adding or removing a book based on the action
 
