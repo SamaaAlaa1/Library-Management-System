@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Book Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./adminDahsboard.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Library Admin</div>
+        <div class="navbar-links">
+            <a href="/dashboard.html">DASHBOARD</a>
+            <a href="/Book_listing.html">CATALOGUE</a>
+            <a href="/About.html">ABOUT US</a>
+            <a href="/Contact.html">CONTACT</a>
+            <a href="/login.html">LOGOUT</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Book Management</h1>
+            <button class="btn btn-primary" id="addBookBtn">
+                <i class="fas fa-plus"></i> Add New Book
+            </button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Genre</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="booksTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="addBookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Book</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="addBookForm">
+                <div class="form-group">
+                    <label for="addTitle">Title</label>
+                    <input type="text" id="addTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="addAuthor">Author</label>
+                    <input type="text" id="addAuthor" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="addGenre">Genre</label>
+                    <input type="text" id="addGenre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="addDescription">Description</label>
+                    <textarea id="addDescription" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="addImage">Image URL</label>
+                    <input type="text" id="addImage" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="addIsBorrowed">Status</label>
+                    <select id="addIsBorrowed" class="form-control">
+                        <option value="false">Available</option>
+                        <option value="true">Borrowed</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancelAddBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editBookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Book</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="editBookForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editTitle">Title</label>
+                    <input type="text" id="editTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAuthor">Author</label>
+                    <input type="text" id="editAuthor" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editGenre">Genre</label>
+                    <input type="text" id="editGenre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editImage">Image URL</label>
+                    <input type="text" id="editImage" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editIsBorrowed">Status</label>
+                    <select id="editIsBorrowed" class="form-control">
+                        <option value="false">Available</option>
+                        <option value="true">Borrowed</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancelEditBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="adminDashboard.js" defer></script>
+</body>
+</html>
