@@ -1,59 +1,67 @@
+
 <html>
-  
+
 <head>
     <title>profile</title>
-    <a href = "" class="back-button">&#8592;</a>
+    <a href="dashboard.html" class="back-button">&#8592; Back</a><br><br>
+    <link href="account.css" rel="stylesheet" type="text/css" />
+
     <h2>My Account</h2>
-    <link rel="stylesheet" href="account.css">
-    
+
 </head>
- <body>
-    <img src="/user.jpeg">
-    <form>
-<div>
-    <label for="fn">First name :</label>
+<body>
+<img id="profilePic" src="/download (4).jpeg"><br>
+<input type="file" id="profilePicInput" accept="image/*"><br><br>
+<form>
+    <div>
+        <label for="fn">First name :</label>
 
-  <input type="text" id="fn"> 
-  <label for="ln">last name :</label> 
-  <input type="text" id ="ln"> 
-</div><br>
-<div>
-    <label for="phone" >Phone Number :</label>
-    <input id="phone" type="text" minlength="11" maxlength="15" placeholder="ex.0201100000000">
-   
-    
-</div><br>
-<div>
-   <div>
-    <label for="email" >Email :</label>
-    <input id="email" type="email"placeholder="example@gmail.com">
-   
-    
-</div><br>
-
-<div>
-    <label for="nid">National ID :</label>
-    <input type="text" id="nid" maxlength="14" placeholder="max 14 number">
-</div><br>
-<div>
-    <label for="g">Gender</label>
-    <select id="g" name="Gender">
-    <option value="" disabled selected>Choose</option>
-    <option value="Male">Male</option>
-    <option value="female">Female</option>
-</select>
-</div><br>
-  <div>
-    <label for="age">Age :</label>
-
-  <input type="number"minlength="14" maxlength="70" id="age"> 
-  
-</div><br>
-<div>
-    <input type="submit" value=" Update">
-        
+        <input type="text" id="fn">
+        <label for="ln">last name :</label>
+        <input type="text" id ="ln">
     </div><br>
+    <div>
+        <label for="phone" >Phone Number :</label>
+        <input id="phone" type="text" minlength="11" maxlength="15" placeholder="ex.0201100000000">
+
+
+    </div><br>
+    <div>
+        <div>
+            <label for="email" >Email :</label>
+            <input id="email" type="email"placeholder="example@gmail.com">
+
+
+        </div><br>
+
+        <div>
+            <label for="nid">National ID :</label>
+            <input type="text" id="nid" maxlength="14" placeholder="max 14 number">
+        </div><br>
+        <div>
+            <label for="g">Gender</label>
+            <select id="g" name="Gender">
+                <option value="" disabled selected>Choose</option>
+                <option value="Male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div><br>
+        <div>
+            <label for="age">Age :</label>
+
+            <input type="number"minlength="14" maxlength="70" id="age">
+
+        </div><br>
+        <div>
+            <input type="submit" value=" Update">
+
+        </div><br>
+    </div>
+
 </form>
- </body>  
+<script src="storage.js"></script>
+<script src="account.js"></script>
+
+</body>
 
 </html>
