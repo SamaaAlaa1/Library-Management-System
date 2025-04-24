@@ -8,6 +8,15 @@ let book ={
     isBorrowed : false
 
 }
+if (!localStorage.getItem("users")) {
+    const defaultUsers = [
+        { username: "user1@gmail.com", password: "1234", isAdmin: false },
+        { username: 'user2@gmail.com',password: "2222",isAdmin: false}
+    ];
+    saveUsers(defaultUsers);
+}
+
+
 function getBooks(){} // Retrieves the list of all books from localStorage
 
 function saveBooks(books){}// Saves the list of books to localStorage
@@ -25,6 +34,7 @@ function saveCurrentUser(user){
 function getUsers(){
     const users = localStorage.getItem("users");
     return users ? JSON.parse(users) : [];
+
 }// Retrieves the list of all users from localStorage
 
 function saveUsers(users){
@@ -34,7 +44,7 @@ function saveUsers(users){
 
 function getBorrowedBooks(){
     const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) return []; 
+    if (!currentUser) return [];
 
     const data = localStorage.getItem(`borrowedBooks_${currentUser}`);
     return data ? JSON.parse(data) : [];
@@ -42,7 +52,7 @@ function getBorrowedBooks(){
 
 function saveBorrowedBooks(userBooks){
     const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) return; 
+    if (!currentUser) return;
 
     localStorage.setItem(`borrowedBooks_${currentUser}`, JSON.stringify(userBooks));
 }// Saves the updated list of borrowed books for the current user to localStorage
@@ -51,7 +61,7 @@ function updateBorrowedBooks(action, book){}// Updates the borrowed books list b
 
 function getFavouriteBooks(){
     const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) return []; 
+    if (!currentUser) return [];
 
     const data = localStorage.getItem(`favourites_${currentUser}`);
     return data ? JSON.parse(data) : [];
@@ -60,50 +70,50 @@ function getFavouriteBooks(){
 
 function saveFavouriteBooks(userBooks){
     const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) return; 
+    if (!currentUser) return;
 
     localStorage.setItem(`favourites_${currentUser}`, JSON.stringify(userBooks));
 }
 
 // Saves the updated list of favorite books for the current user to localStorage
 function updateFavouriteBooks(action, book){
-  document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("fav-btn")) {
-      const bookDiv = e.target.closest(".book");
-      const bookId = bookDiv.dataset.id;
-      const bookImg = bookDiv.querySelector("img").src;
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("fav-btn")) {
+            const bookDiv = e.target.closest(".book");
+            const bookId = bookDiv.dataset.id;
+            const bookImg = bookDiv.querySelector("img").src;
 
-      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+            let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
 
-      const index = favourites.findIndex(book => book.id === bookId);
+            const index = favourites.findIndex(book => book.id === bookId);
 
-      if (index === -1) {
-        favourites.push({ id: bookId, img: bookImg });
-        e.target.textContent = "Remove from Favourites";
-        alert("Book added to favourites!");
-      } else {
-        favourites.splice(index, 1);
-        e.target.textContent = "Add to Favourites";
-        alert("Book removed from favourites!");
-      }
+            if (index === -1) {
+                favourites.push({ id: bookId, img: bookImg });
+                e.target.textContent = "Remove from Favourites";
+                alert("Book added to favourites!");
+            } else {
+                favourites.splice(index, 1);
+                e.target.textContent = "Add to Favourites";
+                alert("Book removed from favourites!");
+            }
 
-      localStorage.setItem("favourites", JSON.stringify(favourites));
-    }
-  });
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
-    document.querySelectorAll(".book").forEach(book => {
-      const bookId = book.dataset.id;
-      const isFav = favourites.find(b => b.id === bookId);
-      const btn = book.querySelector(".fav-btn");
-      if (isFav) {
-        btn.textContent = "Remove from Favourites";
-      } else {
-        btn.textContent = "Add to Favourites";
-      }
+            localStorage.setItem("favourites", JSON.stringify(favourites));
+        }
     });
-  });
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+        document.querySelectorAll(".book").forEach(book => {
+            const bookId = book.dataset.id;
+            const isFav = favourites.find(b => b.id === bookId);
+            const btn = book.querySelector(".fav-btn");
+            if (isFav) {
+                btn.textContent = "Remove from Favourites";
+            } else {
+                btn.textContent = "Add to Favourites";
+            }
+        });
+    });
 }
 
 function getBookStatus(bookid){
@@ -114,5 +124,4 @@ function getBookStatus(bookid){
     }
     return book.isBorrowed ? true : false;
 }
-
 
