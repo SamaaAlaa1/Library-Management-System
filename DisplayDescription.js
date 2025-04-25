@@ -1,6 +1,6 @@
 function sveBookID(bookid){
     localStorage.setItem("selectedBookID", bookid);
-    window.location.href("BookDetails.html");
+    window.location.href="BookDetails.html";
 }
 function displayDescription(containerid){
     const selectedid = localStorage.getItem("selectedBookID");
@@ -9,7 +9,7 @@ function displayDescription(containerid){
         return;
     }
     let books = [];
-    for(let i=0; i<localStorage.length(); i++){
+    for(let i=0; i<localStorage.length; i++){
         let value = JSON.parse(localStorage.getItem(localStorage.key(i)));
         if(Array.isArray(value)){
             books = value;
@@ -17,9 +17,9 @@ function displayDescription(containerid){
         }
 
     }
-    const book = books.find(b=>b.id === selectedid);
+    const book = books.find(b=>b.id == selectedid);
     if(book){
-        book.getElementById("bookimg").src = book.image;
+        document.getElementById("bookimg").src = book.image;
         document.getElementById("booktitle").textContent = book.title
         document.getElementById("genere").textContent = book.genere;
         document.getElementById("bookdetails").textContent= book.description;
