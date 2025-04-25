@@ -143,3 +143,7 @@ span {
     flex-direction: row;
     justify-content: center;
 }
+
+.fav{
+    background-color: red;
+}
