@@ -27,3 +27,4 @@ function displayDescription(containerid){
         document.getElementById(containerid).innerHTML="Not Found";
     }
 }
+window.onload = displayDescription;
