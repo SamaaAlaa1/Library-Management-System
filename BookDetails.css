@@ -5,52 +5,28 @@
 }
 
 html {
-    background-color: #5ab2a6;
+    background-color: #e5f4f2;
 }
-
-#APP_BAR {
-    background-color: #fec63d;
-    height: 20px;
-    padding-left: 10px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    font-family: sans-serif, ariel;
-    font-size: 10px;
+.head{
+   display: flex;
+   align-items: center; 
+   align-self: center;
+   background: #5FA89E;
+   gap: 20px;
+   padding: 15px 40px;
+   border-radius: 10px;
 }
-
-#FIRST {
-    color: white;
-    font-family: sans-serif, ariel;
-    font-size: 12px;
-    margin: 10px;
-    padding-left: 500px;
-}
-
-#SECOND {
-    color: black;
-    font-family: sans-serif, ariel;
-    font-size: 12px;
-    margin: 10px;
-}
-
-.hamburger {
-    width: 26px;
-    height: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.head img{
+    width: 35px;
+    height: 35px;
     cursor: pointer;
-    margin-left: 830px;
-    position: absolute;
-    top: 28px;
 }
-
-.hamburger div {
-    width: 30px;
-    height: 4px;
-    background-color: white;
+.head a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
 }
-
 .book-container {
     display: flex;
     align-items: center;
@@ -72,7 +48,7 @@ img {
 }
 
 .book-info h2 {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 30px;
     margin-top: 50px;
@@ -116,6 +92,30 @@ img {
     font-family: sans-serif, ariel;
     font-size: 18px;
     margin: 10px;
+}
+.Author{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    justify-items: center;
+}
+.Author p:nth-child(1){
+    font-size: 28px;
+}
+.Author p:nth-child(2){
+    font-size: 22px;
+}
+.gen{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    justify-items: center;
+}
+.gen p:nth-child(1){
+    font-size: 28px;
+}
+.gen p:nth-child(2){
+    font-size: 22px;
 }
 
 
