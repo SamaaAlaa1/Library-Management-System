@@ -1,7 +1,7 @@
 function displaybooks(page = 1) {
     const container = document.getElementById("book_list_container");
     const books = JSON.parse(localStorage.getItem("books")) || [];
-    const booksPerPage = 6;
+    const booksPerPage = 9;
     const start = (page - 1) * booksPerPage;
     const end = start + booksPerPage;
     const booksToDisplay = books.slice(start, end);
@@ -45,7 +45,7 @@ function createPaginationButtons(totalPages, currentPage) {
 
     paginationContainer.innerHTML = "";
 
-    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+    for (let i = 1; i <=totalPages; i++) {
         const button = document.createElement("button");
         button.textContent = i;
         button.style.width = "40px";
