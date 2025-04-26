@@ -6,22 +6,58 @@ function saveBooks(books) {
   localStorage.setItem("books", JSON.stringify(books));
 }
 function initDashboard() {
+  localStorage.clear();
   if (getBooks().length === 0) {
+    localStorage.clear();
     const sampleBooks = [
       {
         id: 1,
         title: "The Great Gatsby",
         author: "F. Scott Fitzgerald",
-        genere: "Classic",
-        description:
-          "A story of wealth, love, and the American Dream in the 1920s.",
-        image: "https://via.placeholder.com/50x70",
+        genre: "Classic",
+        description: "A story of wealth, love, and the American Dream in the 1920s.",
+        image: "images/book1.jfif", 
         isBorrowed: false,
       },
+      {
+        id: 2,
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        genre: "Literary Fiction",
+        description: "A powerful exploration of racial injustice and moral growth in the American South.",
+        image: "images/book2.jfif",
+        isBorrowed: false,
+      },
+      {
+        id: 3,
+        title: "Dune",
+        author: "Frank Herbert",
+        genre: "Science Fiction",
+        description: "A epic saga of politics, religion, and survival on a desert planet.",
+        image: "images/book3.jfif",
+        isBorrowed: false,
+      },
+      {
+        id: 4,
+        title: "The Hobbit",
+        author: "J.R.R. Tolkien",
+        genre: "Fantasy",
+        description: "A adventure of Bilbo Baggins, who embarks on a quest to win a share of a dragon's treasure.",
+        image: "images/book4.jfif",
+        isBorrowed: false,
+      },
+      {
+        id: 5,
+        title: "Atomic Habits",
+        author: "James Clear",
+        genre: "Self-Help",
+        description: "A guide to building good habits and breaking bad ones with tiny changes.",
+        image: "images/book5.jfif",
+        isBorrowed: false,
+      }
     ];
     saveBooks(sampleBooks);
   }
-
   renderBooksTable();
   setupEventListeners();
 }

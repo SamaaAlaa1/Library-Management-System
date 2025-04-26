@@ -1,128 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>User Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-<div class="navbar">
-  <a href="#">DASHBOARD</a>
-  <a href="Book_listing.html">CATALOGUE</a>
-  <a href="About.html">ABOUT US</a>
-  <a href="Contact.html">CONTACT</a>
-  <a href="account.html">MY ACCOUNT</a>
-  <a href="login.html">LOGOUT</a>
-
-
-</div>
-
-<div class="container">
-  <h2>BORROWED BOOKS</h2>
-  <div class="book-wrapper">
-    <button class="nav-btn">&#8592;</button>
-    <div class="book-list">
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-    </div>
-    <button class="nav-btn">&#8594;</button>
+  <div class="navbar">
+    <a href="#">DASHBOARD</a>
+    <a href="Book_listing.html">CATALOGUE</a>
+    <a href="About.html">ABOUT US</a>
+    <a href="Contact.html">CONTACT</a>
+    <a href="account.html">MY ACCOUNT</a>
+    <a href="login.html">LOGOUT</a>
   </div>
-</div>
-
-<div class="container">
-        <span>
-        <h2>BORROWING HISTORY</h2>
-        <img src="clock.jpg" style="height: 30px; width: 30px;">
-        </span>
-
-  <div class="book-wrapper">
-    <button class="nav-btn">&#8592;</button>
-    <div class="book-list">
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
-      </div>
-
-      <div class="book" data-id="1">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-        <button class="fav-btn">🤍</button>
+  
+  <div class="container">
+    <h2>Available Books</h2>
+    <div class="slider-container">
+      <div class="book-wrapper available-list">
       </div>
     </div>
-    <button class="nav-btn">&#8594;</button>
   </div>
-</div>
-
-<div class="container">
-        <span>
-            <h2>FAVORITE BOOKS</h2>
-            <img src="heart.png" style="height: 30px; width: 30px;">
-
-        </span>
-
-  <div class="book-wrapper">
-    <button class="nav-btn">&#8592;</button>
-    <div class="book-list">
-      <div class="book">
-        <img src="./images/book1.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-      </div>
-      <div class="book">
-        <img src="./images/book2.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-      </div>
-      <div class="book">
-        <img src="./images/book3.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
-      </div>
-      <div class="book">
-        <img src="./images/book4.jfif" alt="Book">
-        <button class="borrow-btn">BORROW</button>
+  
+  <div class="container">
+    <h2>Your Borrowed Books</h2>
+    <div class="slider-container">
+      <div class="book-wrapper borrowed-list">
       </div>
     </div>
-    <button class="nav-btn">&#8594;</button>
   </div>
-</div>
+  
+  <div class="container">
+    <h2>Your Favorite Books</h2>
+    <div class="slider-container">
+      <div class="book-wrapper favorite-list">
+      </div>
+    </div>
+  </div>
 
-<script src="storage.js"></script>
-<script src="login.js" ></script>
-<script src="dashboard.js"></script>
+  <script src="storage.js"></script>
+  <script src="login.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>

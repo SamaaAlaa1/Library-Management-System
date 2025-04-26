@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <!-- Navigation Bar -->
     <div class="navbar">
         <a href="dashboard.html">DASHBOARD</a>
@@ -32,32 +32,28 @@
         </div>
         
         <div class="search-bar">
-            <select>
+            <select id="searchCategory">
                 <option>All</option>
                 <option>Author</option>
                 <option>Title</option>
-                <option>ISBN</option>
-                <option>Publisher</option>
                 <option>Genre</option>
-                <option>Language</option>
-                <option>Year</option>
             </select>
-            <input type="text" placeholder="Search">
+            <input type="text" id="searchInput" placeholder="Search">
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
         </div>
-   
     </div>
 
     <section class="trending-books-section">
-        <h2> Trending Books</h2>
+        <h2>Trending Books</h2>
         <div class="slider-container">
             <button id="prevBtn" class="nav-btn">&#10094;</button>
-            
-                <div  id="book-slider" class="books-container">
-                    
+            <div id="book-slider" class="books-container">
+               
             </div>
             <button id="nextBtn" class="nav-btn">&#10095;</button>
         </div>
     </section>
-<script src="index.js"></script>
+
+    <script src="home.js"></script>
 </body>
 </html>
