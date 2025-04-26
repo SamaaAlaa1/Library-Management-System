@@ -156,3 +156,27 @@ function borrowBook(bookId) {
         alert('Book borrowed successfully!');
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('dashboardLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (currentUser && currentUser.role === 'admin') {
+            window.location.href = 'adminDashboard.html';
+        } else {
+            window.location.href = 'dashboard.html';
+        }
+    });
+    const loginLink = document.querySelector('a[href="login.html"]');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (currentUser) {
+        loginLink.textContent = 'LOGOUT';
+        loginLink.href = '#';
+        loginLink.addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+    }
+});
