@@ -17,7 +17,10 @@ if (!localStorage.getItem("users")) {
 }
 
 
-function getBooks(){} // Retrieves the list of all books from localStorage
+function getBooks(){// Retrieves the list of all books from localStorage
+    const books = JSON.parse(localStorage.getItem("books")) || [];
+    return books;
+} 
 
 function saveBooks(books){}// Saves the list of books to localStorage
 
@@ -57,7 +60,20 @@ function saveBorrowedBooks(userBooks){
     localStorage.setItem(`borrowedBooks_${currentUser}`, JSON.stringify(userBooks));
 }// Saves the updated list of borrowed books for the current user to localStorage
 
-function updateBorrowedBooks(action, book){}// Updates the borrowed books list by adding or removing a book based on the action
+function updateBorrowedBooks(bookID){
+    let books = getBooks();
+    let borrowed = getBorrowedBooks();
+    let book = books.find(b=>b.id===bookID);
+    if(book){
+        book.isBorrowed = true;
+        localStorage.setItem("books", JSON.stringify(books));
+
+        borrowed.push(book);
+        localStorage.setItem('borrowed_${currentUser}', JSON.stringify(borrowed));
+        
+    }
+
+}// Updates the borrowed books list by adding or removing a book based on the action
 
 function getFavouriteBooks(){
     const currentUser = localStorage.getItem("currentUser");
