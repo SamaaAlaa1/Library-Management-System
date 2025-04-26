@@ -1,4 +1,4 @@
-const booksPerPage = 3;
+const booksPerPage = 6;
 let currentPage = 1;
 
 function getBooks() {
@@ -20,10 +20,16 @@ function renderBooks(books, page = 1) {
         const img = document.createElement('img');
         img.src = book.image || 'Book.png';
         img.alt = book.title;
+        img.style.width= '250px';
+        img.style.height = '350px';
+        img.onclick = ()=> sveBookID(book.id);
 
         const btn = document.createElement('button');
         btn.textContent = book.isBorrowed ? 'Borrowed' : 'Borrow';
         btn.disabled = book.isBorrowed;
+        btn.style.width = '220px';
+        btn.style.height= '60px';
+        btn.style.fontSize = '18px';
 
         bookDiv.appendChild(img);
         bookDiv.appendChild(btn);
