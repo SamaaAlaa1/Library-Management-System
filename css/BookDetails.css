@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #e5f4f2;
+}
+.head{
+   display: flex;
+   align-items: center; 
+   align-self: center;
+   background: #5FA89E;
+   gap: 20px;
+   padding: 15px 40px;
+   border-radius: 10px;
+}
+.head img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+.head a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.book-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.book-info {
+    margin-left: 20px;
+    color: black;
+    font-family: sans-serif, ariel;
+}
+
+.book-info h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    font-family: sans-serif, ariel;
+}
+
+.price {
+    background: white;
+    color: #5FA89E;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    border: none;
+    font-family: sans-serif, ariel;
+}
+
+.book-button {
+    background: none;
+    border: 2px solid #FDC64A;
+    color: #FDC64A;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    font-family: sans-serif, ariel;
+}
+
+.BOOK-DESCRIPTION {
+    margin: 50px 50px 50px 50px;
+}
+
+.BOOK-DESCRIPTION h1 {
+    font-family: sans-serif, ariel;
+    font-weight: bold;
+}
+
+.BOOK-DESCRIPTION p {
+    font-family: sans-serif, ariel;
+    font-size: 18px;
+    margin: 10px;
+}
+.Author{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    justify-items: center;
+}
+.Author p:nth-child(1){
+    font-size: 28px;
+}
+.Author p:nth-child(2){
+    font-size: 22px;
+}
+.gen{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    justify-items: center;
+}
+.gen p:nth-child(1){
+    font-size: 28px;
+}
+.gen p:nth-child(2){
+    font-size: 22px;
+}
+
+
+
+
+

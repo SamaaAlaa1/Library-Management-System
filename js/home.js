@@ -134,7 +134,7 @@ function borrowBook(bookId) {
     const currentUser = getCurrentUser();
     if (!currentUser) {
         alert('Please login to borrow books');
-        window.location.href = 'login.html';
+        window.location.href = '../pages/login.html';
         return;
     }
 
@@ -163,12 +163,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         
         if (currentUser && currentUser.role === 'admin') {
-            window.location.href = 'adminDashboard.html';
+            window.location.href = '../pages/adminDashboard.html';
         } else {
-            window.location.href = 'dashboard.html';
+            window.location.href = '../pages/dashboard.html';
         }
     });
-    const loginLink = document.querySelector('a[href="login.html"]');
+    const loginLink = document.querySelector('a[href="../pages/login.html"]');
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     
     if (currentUser) {
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loginLink.href = '#';
         loginLink.addEventListener('click', function() {
             localStorage.removeItem('currentUser');
-            window.location.href = 'login.html';
+            window.location.href = '../pages/login.html';
         });
     }
 });

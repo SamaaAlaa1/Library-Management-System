@@ -15,7 +15,7 @@ form.addEventListener('submit', function (e) {
 
     const users = getUsers();
 
-    // تأكد من عدم تكرار الإيميل
+
     if (users.find(u => u.email === email)) {
         alert("Email already exists!");
         return;
@@ -30,7 +30,7 @@ form.addEventListener('submit', function (e) {
     users.push(userData);
     saveUsers(users);
 
-    // saveCurrentUser كـ object
+   
     const currentUser = { email: email, isAdmin: false };
     saveCurrentUser(currentUser);
 

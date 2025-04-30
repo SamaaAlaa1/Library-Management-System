@@ -1,0 +1,118 @@
+.booklist{
+   width: 400px;
+   display: grid;
+   padding: 10px;
+   margin: 20px auto; 
+   grid-template-columns: 1fr 1fr 1fr;
+   column-gap: 50px;
+   row-gap: 40px;
+   justify-content: center;
+}
+.Book-Grid{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+        
+}
+.Book-Grid button{
+    color: aliceblue;
+    width: 100px;
+    height: 40px;
+   margin-top: 12px;
+   border-radius: 10px;
+   border: none;
+   padding: 10px;
+   font-size: 15px;
+   align-self: center;
+   cursor: pointer;
+   background-color:#5ab2a6;
+}
+footer{
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
+.circlebtn{
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #5ab2a6;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+.dots{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 26px;
+}
+body{
+    background-color: rgb(243, 243, 223);
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    border: 10px;
+    padding: 10px;
+    width:40%;
+    margin-top: 0px;
+    background-color:none;
+}
+.search select{
+    background-color:  #fec63d;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    color: beige;
+    margin-top: 10px;
+
+}
+.search-bar{
+    flex: 1;
+    border:none;
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    border: #5ab2a6;
+    background-color:#5ab2a6;
+    
+
+}
+input::placeholder{
+    color:antiquewhite;
+}
+.header{
+    margin-top: -7px;
+    display: flex;
+    gap: 20px;
+    background: #5ab2a6;
+    align-self: center;
+    align-items: center;
+    padding: 15px 40px;
+    border-radius: 10px;
+    
+}
+.header img{
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+.header a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
+}
