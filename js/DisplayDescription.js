@@ -1,6 +1,6 @@
 function sveBookID(bookid){
     localStorage.setItem("selectedBookID", bookid);
-    window.location.href="../pages/BookDetails.html";
+    window.location.href="/pages/BookDetails.html";
 }
 function displayDescription(containerid){
     const selectedid = localStorage.getItem("selectedBookID");
@@ -23,6 +23,7 @@ function displayDescription(containerid){
         document.getElementById("booktitle").textContent = book.title
         document.getElementById("genere").textContent = book.genere;
         document.getElementById("bookdetails").textContent= book.description;
+        document.getElementById("bookauthor").textContent = book.author;
     }else{
         document.getElementById(containerid).innerHTML="Not Found";
     }

@@ -16,7 +16,7 @@ function initDashboard() {
         author: "F. Scott Fitzgerald",
         genre: "Classic",
         description: "A story of wealth, love, and the American Dream in the 1920s.",
-        image: "../images/book1.jfif", 
+        image: "/images/book1.jfif", 
         isBorrowed: false,
       },
       {
@@ -25,7 +25,7 @@ function initDashboard() {
         author: "Harper Lee",
         genre: "Literary Fiction",
         description: "A powerful exploration of racial injustice and moral growth in the American South.",
-        image: "../images/book2.jfif",
+        image: "/images/book2.jfif",
         isBorrowed: false,
       },
       {
@@ -34,7 +34,7 @@ function initDashboard() {
         author: "Frank Herbert",
         genre: "Science Fiction",
         description: "A epic saga of politics, religion, and survival on a desert planet.",
-        image: "../images/book3.jfif",
+        image: "/images/book3.jfif",
         isBorrowed: false,
       },
       {
@@ -43,7 +43,7 @@ function initDashboard() {
         author: "J.R.R. Tolkien",
         genre: "Fantasy",
         description: "A adventure of Bilbo Baggins, who embarks on a quest to win a share of a dragon's treasure.",
-        image: "../images/book4.jfif",
+        image: "/images/book4.jfif",
         isBorrowed: false,
       },
       {
@@ -52,7 +52,7 @@ function initDashboard() {
         author: "James Clear",
         genre: "Self-Help",
         description: "A guide to building good habits and breaking bad ones with tiny changes.",
-        image: "../images/book5.jfif",
+        image: "/images/book5.jfif",
         isBorrowed: false,
       }
     ];

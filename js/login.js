@@ -18,7 +18,7 @@ form.addEventListener('submit', function(e) {
             email: 'admin@example.com'
         };
         saveCurrentUser(userData);
-        window.location.href = "../pages/adminDashboard.html";  
+        window.location.href = "/pages/adminDashboard.html";  
         return;
     }
     const users = getUsers();
@@ -37,7 +37,7 @@ form.addEventListener('submit', function(e) {
             email: user.email
         };
         saveCurrentUser(userData);
-        window.location.href = "../pages/dashboard.html";  
+        window.location.href = "/pages/dashboard.html";  
     } else {
         alert("Wrong password");
     }

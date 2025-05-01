@@ -17,7 +17,7 @@ function displaybooks(page = 1) {
         img.alt = book.title;
         img.onclick = () => {
             localStorage.setItem("selectedBookID", book.id);
-            window.location.href = "../pages/BookDetails.html";
+            window.location.href = "/pages/BookDetails.html";
         };
 
         const button = document.createElement("button");

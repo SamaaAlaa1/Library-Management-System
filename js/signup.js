@@ -34,5 +34,5 @@ form.addEventListener('submit', function (e) {
     const currentUser = { email: email, isAdmin: false };
     saveCurrentUser(currentUser);
 
-    window.location.href = "dashboard.html";
+    window.location.href = "/pages/dashboard.html";
 });
