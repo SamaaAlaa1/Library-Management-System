@@ -1,134 +1,272 @@
-const currentUser = JSON.parse(localStorage.getItem("currentUser")) || { username: "guest" };
-const availableList = document.querySelector(".available-list");
-const borrowedList = document.querySelector(".borrowed-list");
-const favoriteList = document.querySelector(".favorite-list");
-let userBorrowed = JSON.parse(localStorage.getItem(currentUser.username + "_borrowed")) || [];
-let userFavorites = JSON.parse(localStorage.getItem(currentUser.username + "_favorites")) || [];
+document.addEventListener('DOMContentLoaded', function() {
+  initDashboard();
+});
+
+function initDashboard() {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  console.log('Current user:', currentUser); // Debug log
+  if (currentUser) {
+    const username = currentUser.email.split('@')[0] ;
+    document.getElementById('username-display').textContent = username;
+  }
+  renderBookSections();
+  setupEventListeners();
+}
+
+function renderBookSections() {
+  const books = getBooks();
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const availableBooks = books.filter(book => !book.isBorrowed);
+  renderBookList(availableBooks, '.available-list');
+  
+  if (currentUser) {
+    const borrowedBooks = books.filter(book => 
+      book.isBorrowed && book.borrowedBy === currentUser.id
+    );
+    renderBookList(borrowedBooks, '.borrowed-list');
+    const favoriteBooks = books.filter(book => 
+      currentUser.favorites && currentUser.favorites.includes(book.id)
+    );
+    renderBookList(favoriteBooks, '.favorite-list');
+  }
+}
+
+function renderBookList(books, selector) {
+  const container = document.querySelector(selector);
+  container.innerHTML = '';
+  
+  if (books.length === 0) {
+    container.innerHTML = '<p class="no-books">No books found</p>';
+    return;
+  }
+  
+  books.forEach(book => {
+    const bookElement = createBookElement(book);
+    container.appendChild(bookElement);
+  });
+}
+
+function createBookElement(book) {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const isFavorite = currentUser && currentUser.favorites && currentUser.favorites.includes(book.id);
+  const isBorrowed = book.isBorrowed && book.borrowedBy === currentUser?.id;
+  
+  const bookElement = document.createElement('div');
+  bookElement.className = 'book';
+  bookElement.dataset.id = book.id;
+  
+  bookElement.innerHTML = `
+    <img src="${book.image || 'https://via.placeholder.com/160x240'}" 
+         alt="${book.title}" class="book-cover">
+    <div class="book-info">
+      <h3 class="book-title">${book.title}</h3>
+      <p class="book-author">${book.author}</p>
+    </div>
+    <div class="book-actions">
+      <button class="borrow-btn ${isBorrowed ? 'borrowed' : ''}" data-id="${book.id}">
+        <i class="fas fa-book-open"></i> ${isBorrowed ? 'Return' : 'Borrow'}
+      </button>
+      <button class="fav-btn ${isFavorite ? 'active' : ''}" data-id="${book.id}">
+        <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
+      </button>
+    </div>
+  `;
+  
+  return bookElement;
+}
+
+function setupEventListeners() {
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.book') && !e.target.closest('button')) {
+      const bookElement = e.target.closest('.book');
+      const bookId = parseInt(bookElement.dataset.id);
+      showBookDetails(bookId);
+    }
+    if (e.target.closest('.borrow-btn')) {
+      const btn = e.target.closest('.borrow-btn');
+      const bookId = parseInt(btn.dataset.id);
+      const book = getBooks().find(b => b.id === bookId);
+      btn.classList.add('clicked');
+      setTimeout(() => btn.classList.remove('clicked'), 300);
+      
+      if (book.isBorrowed) {
+        returnBook(bookId);
+      } else {
+        borrowBook(bookId);
+      }
+    }
+    if (e.target.closest('.fav-btn')) {
+      const btn = e.target.closest('.fav-btn');
+      const bookId = parseInt(btn.dataset.id);
+      btn.classList.add('heart-beat');
+      setTimeout(() => btn.classList.remove('heart-beat'), 300);
+      
+      toggleFavorite(bookId, btn);
+    }
+    
+    if (e.target.closest('.close-btn')) {
+      closeModal();
+    }
+    if (e.target.closest('#borrow-btn-modal')) {
+      const btn = e.target.closest('#borrow-btn-modal');
+      const bookId = parseInt(btn.dataset.id);
+      const book = getBooks().find(b => b.id === bookId);
+      
+      btn.classList.add('clicked');
+      setTimeout(() => btn.classList.remove('clicked'), 300);
+      
+      if (book.isBorrowed) {
+        returnBook(bookId);
+      } else {
+        borrowBook(bookId);
+      }
+    }
+    
+    if (e.target.closest('#favorite-btn-modal')) {
+      const btn = e.target.closest('#favorite-btn-modal');
+      const bookId = parseInt(btn.dataset.id);
+      const favBtn = document.querySelector(`.fav-btn[data-id="${bookId}"]`);
+      
+      btn.classList.add('heart-beat');
+      setTimeout(() => btn.classList.remove('heart-beat'), 300);
+      
+      toggleFavorite(bookId, favBtn || btn);
+    }
+    if (e.target.closest('.slider-nav')) {
+      const btn = e.target.closest('.slider-nav');
+      const direction = btn.classList.contains('prev') ? -1 : 1;
+      const container = btn.parentElement.querySelector('.book-wrapper');
+      scrollSlider(container, direction);
+    }
+  });
+}
+
+function showBookDetails(bookId) {
+  const book = getBooks().find(b => b.id === bookId);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const isFavorite = currentUser && currentUser.favorites && currentUser.favorites.includes(bookId);
+  
+  if (!book) return;
+  document.getElementById('book-modal-title').textContent = book.title;
+  document.getElementById('book-modal-image').src = book.image || 'https://via.placeholder.com/200x300';
+  document.getElementById('book-modal-author').textContent = book.author;
+  document.getElementById('book-modal-genre').textContent = book.genre || 'N/A';
+  document.getElementById('book-modal-status').textContent = book.isBorrowed ? 'Borrowed' : 'Available';
+  document.getElementById('book-modal-description').textContent = book.description || 'No description available';
+
+  const borrowBtn = document.getElementById('borrow-btn-modal');
+  const favoriteBtn = document.getElementById('favorite-btn-modal');
+  
+  borrowBtn.dataset.id = bookId;
+  favoriteBtn.dataset.id = bookId;
+  
+  if (book.isBorrowed) {
+    borrowBtn.innerHTML = '<i class="fas fa-undo"></i> Return';
+  } else {
+    borrowBtn.innerHTML = '<i class="fas fa-book-open"></i> Borrow';
+  }
+  
+  favoriteBtn.innerHTML = isFavorite ? 
+    '<i class="fas fa-heart"></i> Remove Favorite' : 
+    '<i class="far fa-heart"></i> Add Favorite';
+  document.getElementById('bookDetailsModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('bookDetailsModal').style.display = 'none';
+}
+
+function borrowBook(bookId) {
+  const books = getBooks();
+  const bookIndex = books.findIndex(b => b.id === bookId);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  
+  if (bookIndex === -1 || !currentUser) return;
+  
+  books[bookIndex].isBorrowed = true;
+  books[bookIndex].borrowedBy = currentUser.id;
+  books[bookIndex].borrowDate = new Date().toISOString();
+  
+  saveBooks(books);
+  renderBookSections();
+  closeModal();
+}
+
+function returnBook(bookId) {
+  const books = getBooks();
+  const bookIndex = books.findIndex(b => b.id === bookId);
+  
+  if (bookIndex === -1) return;
+  
+  books[bookIndex].isBorrowed = false;
+  books[bookIndex].borrowedBy = null;
+  books[bookIndex].borrowDate = null;
+  
+  saveBooks(books);
+  renderBookSections();
+  closeModal();
+}
+
+function toggleFavorite(bookId, button) {
+  console.log('toggleFavorite called with bookId:', bookId);
+  
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  console.log('Current user:', currentUser); 
+  
+  if (!currentUser) {
+    alert('Please login first to add books to your favorites!'); 
+    return;
+  }
+
+  if (!currentUser.favorites) {
+    console.log('Initializing favorites array'); 
+    currentUser.favorites = [];
+  }
+  
+  const favIndex = currentUser.favorites.indexOf(bookId);
+  const isFavorite = favIndex !== -1;
+  console.log('Current favorites:', currentUser.favorites, 'isFavorite:', isFavorite); 
+  
+  if (isFavorite) {
+    console.log('Removing from favorites'); 
+    currentUser.favorites.splice(favIndex, 1);
+    if (button) {
+      button.classList.remove('active');
+      button.innerHTML = '<i class="far fa-heart"></i>';
+    }
+  } else {
+    console.log('Adding to favorites');
+    currentUser.favorites.push(bookId);
+    if (button) {
+      button.classList.add('active');
+      button.innerHTML = '<i class="fas fa-heart"></i>';
+    }
+  }
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  console.log('Updated user:', currentUser); 
+  
+  renderBookSections();
+  const modalFavoriteBtn = document.getElementById('favorite-btn-modal');
+  if (modalFavoriteBtn && parseInt(modalFavoriteBtn.dataset.id) === bookId) {
+    modalFavoriteBtn.innerHTML = isFavorite ? 
+      '<i class="far fa-heart"></i> Add Favorite' : 
+      '<i class="fas fa-heart"></i> Remove Favorite';
+  }
+}
+
+function scrollSlider(container, direction) {
+  const scrollAmount = 300;
+  container.scrollBy({
+    left: scrollAmount * direction,
+    behavior: 'smooth'
+  });
+}
 
 function getBooks() {
-  const books = localStorage.getItem("books");
+  const books = localStorage.getItem('books');
   return books ? JSON.parse(books) : [];
 }
 
-function saveData() {
-  localStorage.setItem(currentUser.username + "_borrowed", JSON.stringify(userBorrowed));
-  localStorage.setItem(currentUser.username + "_favorites", JSON.stringify(userFavorites));
+function saveBooks(books) {
+  localStorage.setItem('books', JSON.stringify(books));
 }
-
-function createBookElement(book, withActions = true) {
-  const bookDiv = document.createElement("div");
-  bookDiv.className = "book";
-  bookDiv.setAttribute("data-id", book.id);
-
-  const img = document.createElement("img");
-  img.src = book.image || "https://placehold.co/160x240?text=No+Cover";
-  img.className = "book-cover";
-  img.alt = book.title;
-  bookDiv.appendChild(img);
-
-  const infoDiv = document.createElement("div");
-  infoDiv.className = "book-info";
-  
-  const title = document.createElement("h3");
-  title.className = "book-title";
-  title.textContent = book.title;
-  infoDiv.appendChild(title);
-  
-  const author = document.createElement("p");
-  author.className = "book-author";
-  author.textContent = `by ${book.author}`;
-  infoDiv.appendChild(author);
-  
-  bookDiv.appendChild(infoDiv);
-
-  if (withActions) {
-    const actionsDiv = document.createElement("div");
-    actionsDiv.className = "book-actions";
-    const borrowBtn = document.createElement("button");
-    borrowBtn.className = "borrow-btn";
-    borrowBtn.textContent = 'BORROW';
-    const favBtn = document.createElement("button");
-    favBtn.className = "fav-btn";
-    favBtn.innerHTML = '<i class="fas fa-heart"></i>';
-    actionsDiv.appendChild(borrowBtn);
-    actionsDiv.appendChild(favBtn);
-    bookDiv.appendChild(actionsDiv);
-    borrowBtn.addEventListener("click", () => {
-      if (!userBorrowed.find(b => b.id === book.id)) {
-        userBorrowed.push({ 
-          id: book.id, 
-          title: book.title,
-          author: book.author,
-          image: book.image 
-        });
-        saveData();
-        renderBooks();
-      }
-    });
-    favBtn.addEventListener("click", () => {
-      const favoriteIndex = userFavorites.findIndex(b => b.id === book.id);
-      if (favoriteIndex === -1) {
-        userFavorites.push({ 
-          id: book.id,
-          title: book.title,
-          author: book.author,
-          image: book.image
-        });
-        favBtn.classList.add("active");
-      } else {
-        userFavorites.splice(favoriteIndex, 1);
-        favBtn.classList.remove("active");
-      }
-      saveData();
-      renderBooks();
-    });
-    const isFav = userFavorites.find(b => b.id === book.id);
-    if (isFav) {
-      favBtn.classList.add("active");
-    }
-  }
-
-  return bookDiv;
-}
-function renderBooks() {
-  borrowedList.innerHTML = "";
-  favoriteList.innerHTML = "";
-
-  userBorrowed.forEach(book => {
-    borrowedList.appendChild(createBookElement(book, false));
-  });
-
-  userFavorites.forEach(book => {
-    favoriteList.appendChild(createBookElement(book, false));
-  });
-}
-function loadAvailableBooks() {
-  const books = getBooks();
-  availableList.innerHTML = "";
-  books.forEach(book => {
-    if (!book.isBorrowed) {
-      availableList.appendChild(createBookElement(book, true));
-    }
-  });
-}
-document.addEventListener("DOMContentLoaded", () => {
-  loadAvailableBooks();
-  renderBooks();
-  document.querySelectorAll(".slider-container").forEach(container => {
-    const wrapper = container.querySelector(".book-wrapper");
-    const prevBtn = document.createElement("button");
-    prevBtn.className = "slider-nav prev";
-    prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    prevBtn.addEventListener("click", () => {
-      wrapper.scrollBy({ left: -300, behavior: 'smooth' });
-    });
-    container.appendChild(prevBtn);
-    const nextBtn = document.createElement("button");
-    nextBtn.className = "slider-nav next";
-    nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    nextBtn.addEventListener("click", () => {
-      wrapper.scrollBy({ left: 300, behavior: 'smooth' });
-    });
-    container.appendChild(nextBtn);
-  });
-});
