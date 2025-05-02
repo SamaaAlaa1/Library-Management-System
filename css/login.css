@@ -3,33 +3,53 @@
     padding: 0;
     box-sizing: border-box;
 }
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 body {
-    background-color: #5ab2a6;
+    background-image: url("/images/libraryback.jpg");
+    background-size: cover;
+    background-position: center;
+    background-color: #65081F;
     font-family: "Lucida Console", "Courier New", monospace;
-    height: 100vh;
+    height: 100%; /* Ensures body fills the height */
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
+.glass-box{
+    background: rgba(188, 156, 156, 0.2);
+    border-radius: 15px;
+    width: 800px;
+    height: 430px;
+    padding: 60px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 900px;
+    width: 80%;
+    text-align: center;
+    height: auto;
+}
 #login-container {
     text-align: center;
-    max-width: 400px;
+    max-width: 800px;
     width: 100%;
 }
 
 #welcome {
-    color: #fec63d;
-    font-size: 30px;
+    color: #65081F;
+    font-size: 46px;
     font-weight: bolder;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 #login-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     align-items: center;
 }
 
@@ -44,7 +64,7 @@ body {
 }
 
 #forgot {
-    font-size: 12px;
+    font-size: 14px;
     color: white;
     text-decoration: none;
     align-self: center;
@@ -66,19 +86,26 @@ body {
     margin-top: 10px;
 }
 
+
 #login,
 #signup {
-    background-color: #fec63d;
+    background-color: #65081F;
     color: white;
     font-weight: bold;
-    padding: 10px 30px;
+    padding: 12px 35px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
 }
+#login:hover{
+    border: 2px solid #65081F ;
+    background-color: transparent;
+    color: #65081F;
+    transition: 0.3s ease;
+}
 
 #noacc {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 15px;
     color: white;
 }
@@ -94,4 +121,5 @@ body {
     height: 200px;
     border-radius: 50%;
     margin: 40px auto 0;
+}
 }

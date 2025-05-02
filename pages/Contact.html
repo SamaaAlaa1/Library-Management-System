@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Contact Us - Library</title>
-    <link rel="stylesheet" href="../css/contact.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="navbar">
-        <a href="../index.html">HOME</a>
+        <a href="/index.html">HOME</a>
         <a href="dashboard.html">DASHBOARD</a>
         <a href="Book_listing.html">CATALOGUE</a>
         <a href="about.html">ABOUT US</a>
-        <a href="contact.html">CONTACT</a>
-        <!-- <img src="menu icon.jpg" alt="Menu" style="height: 30px; width: 30px;"> -->
+        <a href="contact.html" class="active">CONTACT</a>
     </div>
 
     <div class="container contact">
         <h2>Contact Us</h2>
-        <p>We’d love to hear from you! Reach out with any questions, suggestions, or support needs.</p>
+        <p>We'd love to hear from you! Reach out with any questions, suggestions, or support needs.</p>
 
         <div class="contact-info">
             <p><strong>Email:</strong> support@digitallibrary.com</p>
@@ -26,13 +26,15 @@
             <p><strong>Address:</strong> 123 Knowledge Ave, Cairo, Egypt</p>
         </div>
 
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
+        <form id="contactForm" class="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
         </form>
+        <div id="confirmation" class="confirmation-message"></div>
     </div>
 
+    <script src="/js/contact.js"></script>
 </body>
 </html>

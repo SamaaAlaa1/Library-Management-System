@@ -5,6 +5,25 @@ function getBooks() {
 function saveBooks(books) {
   localStorage.setItem("books", JSON.stringify(books));
 }
+
+function getMessages() {
+  const messages = localStorage.getItem("contactMessages");
+  return messages ? JSON.parse(messages) : [];
+}
+
+function saveMessages(messages) {
+  localStorage.setItem("contactMessages", JSON.stringify(messages));
+}
+
+function getUsers() {
+  const users = localStorage.getItem("users");
+  return users ? JSON.parse(users) : [];
+}
+
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
 function initDashboard() {
   localStorage.clear();
   if (getBooks().length === 0) {
@@ -16,7 +35,7 @@ function initDashboard() {
         author: "F. Scott Fitzgerald",
         genre: "Classic",
         description: "A story of wealth, love, and the American Dream in the 1920s.",
-        image: "../images/book1.jfif", 
+        image: "/images/book1.jfif", 
         isBorrowed: false,
       },
       {
@@ -25,7 +44,7 @@ function initDashboard() {
         author: "Harper Lee",
         genre: "Literary Fiction",
         description: "A powerful exploration of racial injustice and moral growth in the American South.",
-        image: "../images/book2.jfif",
+        image: "/images/book2.jfif",
         isBorrowed: false,
       },
       {
@@ -34,7 +53,7 @@ function initDashboard() {
         author: "Frank Herbert",
         genre: "Science Fiction",
         description: "A epic saga of politics, religion, and survival on a desert planet.",
-        image: "../images/book3.jfif",
+        image: "/images/book3.jfif",
         isBorrowed: false,
       },
       {
@@ -43,7 +62,7 @@ function initDashboard() {
         author: "J.R.R. Tolkien",
         genre: "Fantasy",
         description: "A adventure of Bilbo Baggins, who embarks on a quest to win a share of a dragon's treasure.",
-        image: "../images/book4.jfif",
+        image: "/images/book4.jfif",
         isBorrowed: false,
       },
       {
@@ -52,14 +71,59 @@ function initDashboard() {
         author: "James Clear",
         genre: "Self-Help",
         description: "A guide to building good habits and breaking bad ones with tiny changes.",
-        image: "../images/book5.jfif",
+        image: "/images/book5.jfif",
         isBorrowed: false,
       }
     ];
     saveBooks(sampleBooks);
   }
+  if (getUsers().length === 0) {
+    const sampleUsers = [
+      {
+        id: 1,
+        name: "Admin User",
+        email: "admin@example.com",
+        password: "12345",
+        role: "admin",
+        status: "active"
+      },
+      {
+        id: 2,
+        name: "John Doe",
+        email: "john@example.com",
+        password: "john123",
+        role: "user",
+        status: "active"
+      }
+    ];
+    saveUsers(sampleUsers);
+  }
   renderBooksTable();
+  renderMessagesTable();
+  renderUsersTable();
   setupEventListeners();
+}
+
+function addNewBook() {
+  const books = getBooks();
+  const newId = books.length > 0 ? Math.max(...books.map((b) => b.id)) + 1 : 1;
+
+  const newBook = {
+    id: newId,
+    title: document.getElementById("addTitle").value,
+    author: document.getElementById("addAuthor").value,
+    genre: document.getElementById("addGenre").value, 
+    description: document.getElementById("addDescription").value,
+    image: document.getElementById("addImage").value,
+    isBorrowed: document.getElementById("addIsBorrowed").value === "true",
+  };
+
+  books.push(newBook);
+  saveBooks(books);
+
+  document.getElementById("addBookModal").style.display = "none";
+  document.getElementById("addBookForm").reset();
+  renderBooksTable();
 }
 
 function renderBooksTable() {
@@ -75,7 +139,7 @@ function renderBooksTable() {
             }" alt="Book Cover" class="book-cover"></td>
             <td>${book.title}</td>
             <td>${book.author}</td>
-            <td>${book.genere || "-"}</td>
+            <td>${book.genre || "-"}</td> <!-- Changed to "genre" -->
             <td class="${
               book.isBorrowed ? "status-borrowed" : "status-available"
             }">
@@ -96,40 +160,122 @@ function renderBooksTable() {
   });
 }
 
+function renderMessagesTable() {
+  const messages = getMessages();
+  const tableBody = document.getElementById("messagesTableBody");
+  tableBody.innerHTML = "";
+
+  if (messages.length === 0) {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td colspan="5" style="text-align: center;">No messages found</td>`;
+    tableBody.appendChild(row);
+    return;
+  }
+
+  messages.forEach((message) => {
+    const row = document.createElement("tr");
+    const date = new Date(message.timestamp);
+    const formattedDate = date.toLocaleString();
+    
+    row.innerHTML = `
+      <td>${message.name}</td>
+      <td>${message.email}</td>
+      <td>${message.message.substring(0, 50)}${message.message.length > 50 ? '...' : ''}</td>
+      <td>${formattedDate}</td>
+      <td>
+          <div class="action-buttons">
+              <button class="action-btn btn-primary view-message-btn" data-id="${message.timestamp}">
+                  <i class="fas fa-eye"></i> View
+              </button>
+              <button class="action-btn btn-danger delete-message-btn" data-id="${message.timestamp}">
+                  <i class="fas fa-trash"></i> Delete
+              </button>
+          </div>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+function renderUsersTable() {
+  const users = getUsers();
+  const tableBody = document.getElementById("usersTableBody");
+  tableBody.innerHTML = "";
+
+  users.forEach((user) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${user.id}</td>
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>${user.role.charAt(0).toUpperCase() + user.role.slice(1)}</td>
+      <td class="status-${user.status}">${user.status.charAt(0).toUpperCase() + user.status.slice(1)}</td>
+      <td>
+          <div class="action-buttons">
+              <button class="action-btn btn-warning edit-user-btn" data-id="${user.id}">
+                  <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="action-btn btn-danger delete-user-btn" data-id="${user.id}">
+                  <i class="fas fa-trash"></i> Delete
+              </button>
+          </div>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+function addNewUser(e) {
+  e.preventDefault();
+  
+  const users = getUsers();
+  const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+
+  const newUser = {
+    id: newId,
+    name: document.getElementById("userName").value,
+    email: document.getElementById("userEmail").value,
+    password: document.getElementById("userPassword").value,
+    role: document.getElementById("userRole").value,
+    status: "active"
+  };
+
+  users.push(newUser);
+  saveUsers(users);
+
+  document.getElementById("addUserModal").style.display = "none";
+  document.getElementById("addUserForm").reset();
+  renderUsersTable();
+}
+
 function setupEventListeners() {
+  document.querySelectorAll('.menu-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const target = this.dataset.target;
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
   document.getElementById("addBookBtn").addEventListener("click", openAddModal);
-  document
-    .getElementById("booksTableBody")
-    .addEventListener("click", function (e) {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-
-      const bookId = parseInt(btn.dataset.id);
-
-      if (btn.classList.contains("btn-warning")) {
-        openEditModal(bookId);
-      } else if (btn.classList.contains("btn-danger")) {
-        deleteBook(bookId);
-      }
-    });
-  document
-    .getElementById("addBookForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      addNewBook();
-    });
-
-  document
-    .getElementById("editBookForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      updateBook();
-    });
-
-  document.querySelectorAll(".close-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      this.closest(".modal").style.display = "none";
-    });
+  document.getElementById("booksTableBody").addEventListener("click", handleBookActions);
+  
+  document.getElementById("messagesTableBody").addEventListener("click", handleMessageActions);
+  document.getElementById("closeMessageBtn").addEventListener("click", () => {
+    document.getElementById("viewMessageModal").style.display = "none";
+  });
+  document.getElementById("deleteMessageBtn").addEventListener("click", deleteCurrentMessage);
+  
+  document.getElementById("addUserBtn").addEventListener("click", openAddUserModal);
+  document.getElementById("usersTableBody").addEventListener("click", handleUserActions);
+  document.getElementById("addUserForm").addEventListener("submit", addNewUser);
+  document.getElementById("cancelAddUserBtn").addEventListener("click", () => {
+    document.getElementById("addUserModal").style.display = "none";
   });
   document
     .getElementById("cancelAddBtn")
@@ -137,20 +283,111 @@ function setupEventListeners() {
       document.getElementById("addBookModal").style.display = "none";
     });
 
-  document
-    .getElementById("cancelEditBtn")
-    .addEventListener("click", function () {
-      document.getElementById("editBookModal").style.display = "none";
+  const addBookForm = document.getElementById("addBookForm");
+  if (addBookForm) {
+    addBookForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      addNewBook();
     });
+  }
 
-  document.querySelectorAll(".modal").forEach((modal) => {
-    modal.addEventListener("click", function (e) {
-      if (e.target === this) {
-        this.style.display = "none";
-      }
+  const editBookForm = document.getElementById("editBookForm");
+  if (editBookForm) {
+    editBookForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      updateBook();
     });
-  });
+  }
 }
+
+function handleBookActions(e) {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  const bookId = parseInt(btn.dataset.id);
+
+  if (btn.classList.contains("btn-warning")) {
+    openEditModal(bookId);
+  } else if (btn.classList.contains("btn-danger")) {
+    deleteBook(bookId);
+  }
+}
+
+function handleMessageActions(e) {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  const timestamp = btn.dataset.id;
+
+  if (btn.classList.contains("view-message-btn")) {
+    viewMessage(timestamp);
+  } else if (btn.classList.contains("delete-message-btn")) {
+    deleteMessage(timestamp);
+  }
+}
+
+function handleUserActions(e) {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  const userId = parseInt(btn.dataset.id);
+
+  if (btn.classList.contains("edit-user-btn")) {
+    editUser(userId);
+  } else if (btn.classList.contains("delete-user-btn")) {
+    deleteUser(userId);
+  }
+}
+
+function viewMessage(timestamp) {
+  const messages = getMessages();
+  const message = messages.find(m => m.timestamp === timestamp);
+  
+  if (!message) return;
+
+  document.getElementById("viewMessageName").textContent = message.name;
+  document.getElementById("viewMessageEmail").textContent = message.email;
+  document.getElementById("viewMessageContent").textContent = message.message;
+  
+  const date = new Date(message.timestamp);
+  document.getElementById("viewMessageDate").textContent = date.toLocaleString();
+  
+  document.getElementById("viewMessageModal").style.display = "flex";
+  document.getElementById("deleteMessageBtn").dataset.id = timestamp;
+}
+
+function deleteMessage(timestamp) {
+  if (confirm("Are you sure you want to delete this message?")) {
+    const messages = getMessages().filter(m => m.timestamp !== timestamp);
+    saveMessages(messages);
+    renderMessagesTable();
+  }
+}
+
+function deleteCurrentMessage() {
+  const timestamp = document.getElementById("deleteMessageBtn").dataset.id;
+  deleteMessage(timestamp);
+  document.getElementById("viewMessageModal").style.display = "none";
+}
+
+function openAddUserModal() {
+  document.getElementById("addUserModal").style.display = "flex";
+}
+
+
+
+function editUser(userId) {
+  alert("Edit user functionality to be implemented");
+}
+
+function deleteUser(userId) {
+  if (confirm("Are you sure you want to delete this user?")) {
+    const users = getUsers().filter(u => u.id !== userId);
+    saveUsers(users);
+    renderUsersTable();
+  }
+}
+
 
 function openAddModal() {
   document.getElementById("addBookModal").style.display = "flex";
@@ -163,7 +400,7 @@ function openEditModal(bookId) {
   document.getElementById("editId").value = book.id;
   document.getElementById("editTitle").value = book.title;
   document.getElementById("editAuthor").value = book.author;
-  document.getElementById("editGenre").value = book.genere || "";
+  document.getElementById("editGenre").value = book.genre || "";
   document.getElementById("editDescription").value = book.description || "";
   document.getElementById("editImage").value = book.image || "";
   document.getElementById("editIsBorrowed").value = book.isBorrowed
@@ -173,27 +410,6 @@ function openEditModal(bookId) {
   document.getElementById("editBookModal").style.display = "flex";
 }
 
-function addNewBook() {
-  const books = getBooks();
-  const newId = books.length > 0 ? Math.max(...books.map((b) => b.id)) + 1 : 1;
-
-  const newBook = {
-    id: newId,
-    title: document.getElementById("addTitle").value,
-    author: document.getElementById("addAuthor").value,
-    genere: document.getElementById("addGenre").value,
-    description: document.getElementById("addDescription").value,
-    image: document.getElementById("addImage").value,
-    isBorrowed: document.getElementById("addIsBorrowed").value === "true",
-  };
-
-  books.push(newBook);
-  saveBooks(books);
-
-  document.getElementById("addBookModal").style.display = "none";
-  document.getElementById("addBookForm").reset();
-  renderBooksTable();
-}
 
 function updateBook() {
   const id = parseInt(document.getElementById("editId").value);
@@ -205,7 +421,7 @@ function updateBook() {
       id: id,
       title: document.getElementById("editTitle").value,
       author: document.getElementById("editAuthor").value,
-      genere: document.getElementById("editGenre").value,
+      genre: document.getElementById("editGenre").value, 
       description: document.getElementById("editDescription").value,
       image: document.getElementById("editImage").value,
       isBorrowed: document.getElementById("editIsBorrowed").value === "true",

@@ -1,81 +1,48 @@
 <!DOCTYPE html>
-<html>
-  
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="../css/stylelisting.css">
-    
-    <div class="header">
-      <a href="../index.html">HOME</a>
-     <a href="dashboard.html">DASHBOARD</a>
-     <a href="#">CATALOGUE</a>
-     <a href="About.html">ABOUT US</a>
-     <a href="Contact.html">CONTACT</a>
-    </div>
-    <div>
-   <title>Book listing</title>
-
-   <div class="search" >
-    <select>
-      <option>ALL</option>
-      <option>AUTHOR</option>
-      <option>Title</option>
-      <option>GENERE</option>
-    </select>
-   <input class="search-bar" type="search" placeholder="Search ">
-   </div>
-    </div> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalogue | CozyShelf</title>
+    <link rel="stylesheet" href="/css/stylelisting.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
- <body>
- 
-  <div class="booklist">
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book1"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book2"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book3"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book4"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book5"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book6"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book7"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book8"> 
-    <button>Borrow</button>
-   </div>
-   <div class="Book-Grid">
-    <img src="/Book.png" alt="Book9"> 
-    <button>Borrow</button>
-   </div><br>
-  </div>
- </body> 
- 
- <footer>
-  
-    <button class="circlebtn">1</button>
-    <button class="circlebtn">2</button>
-    <button class="circlebtn">3</button>
-    <span class="dots">...</span>
-    <button class="circlebtn">7</button>
-    <script src="../js/pagination.js"></script>
-    <!-- <script src="Book_listing.js"></script> -->
-    <script src="../js/DisplayDescription.js"></script>
- </footer> 
+<body>
+    <div class="navbar">
+        <div class="ourname">
+            <h2>CozyShelf</h2>
+        </div>
+        <div class="nav">
+            <a href="/index.html">HOME</a>
+            <a href="dashboard.html">DASHBOARD</a>
+            <a href="Book_listing.html" class="active">CATALOGUE</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search">
+            <select id="searchType">
+                <option>ALL</option>
+                <option>AUTHOR</option>
+                <option>TITLE</option>
+                <option>GENRE</option>
+            </select>
+            <input class="search-bar" type="search" placeholder="Search books...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="book_list_container" class="booklist"></div>
+    </div>
+
+    <footer id="pagination">
+    </footer>
+
+    <script src="/js/pagination.js"></script>
+    <script src="/js/DisplayDescription.js"></script>
+    <script src="/js/Book_listing.js"></script>
+</body>
 </html>

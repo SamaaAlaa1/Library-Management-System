@@ -3,35 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>About Us - Library</title>
-    <link rel="stylesheet" href="../css/about.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="navbar">
-        <a href="../index.html">HOME</a>
+        <a href="/index.html">HOME</a>
         <a href="dashboard.html">DASHBOARD</a>
         <a href="Book_listing.html">CATALOGUE</a>
-        <a href="#">ABOUT US</a>
-        <a href="Contact.html">CONTACT</a>
-        <!-- <img src="menu icon.jpg" alt="Menu" style="height: 30px; width: 30px;"> -->
+        <a href="about.html" class="active">ABOUT US</a>
+        <a href="contact.html">CONTACT</a>
     </div>
 
     <div class="container about">
         <h2>About Our Library</h2>
-        <img src="../images/books.png" alt="Library" class="about-img">
-        <p>
-            Welcome to our digital library — your gateway to knowledge, creativity, and discovery. Established in 2024, our platform is dedicated to making learning accessible for everyone, everywhere.
-        </p>
-        <p>
-            Our collection spans thousands of books across genres, from classic literature to modern science fiction. Whether you're a student, a researcher, or just a curious reader, there's something here for you.
-        </p>
-        <p>
-            We believe in the power of stories and the importance of accessible education. That's why we provide tools for borrowing, tracking history, and creating your own favorites list — all in one user-friendly dashboard.
-        </p>
-        <p>
-            Stay connected, explore more, and let your next adventure begin with just one click!
-        </p>
+        <div class="about-content">
+            <!-- <img src="/images/books.png" alt="Library" class="about-img"> -->
+            <div class="about-text">
+                <p>
+                    Welcome to our digital library — your gateway to knowledge, creativity, and discovery. Established in 2024, our platform is dedicated to making learning accessible for everyone, everywhere.
+                </p>
+                <p>
+                    Our collection spans thousands of books across genres, from classic literature to modern science fiction. Whether you're a student, a researcher, or just a curious reader, there's something here for you.
+                </p>
+                <p>
+                    We believe in the power of stories and the importance of accessible education. That's why we provide tools for borrowing, tracking history, and creating your own favorites list — all in one user-friendly dashboard.
+                </p>
+                <p>
+                    Stay connected, explore more, and let your next adventure begin with just one click!
+                </p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Books Available</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Access</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="/js/about.js"></script>
 </body>
 </html>

@@ -1,62 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management System</title>
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-  
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <a href="#" id="dashboardLink">DASHBOARD</a>
-        <a href="pages/Book_listing.html" id="black">CATALOGUE</a>
-        <a href="pages/About.html" id="black">ABOUT US</a>
-        <a href="pages/Contact.html">CONTACT</a>
-        <a href="pages/login.html">LOGIN</a>
-        <a href="pages/signup.html" id="signUp">SIGN UP</a>
-    </div>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/home.css">
+        <link href="https://fonts.googleapis.com/css2?family=Miniver&display=swap" rel="stylesheet">
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>OUR BOOKSTORE</h1>
-        <div>
-            <div class="blob">
-                <img src="./images/books (2).png" alt="">
-
-                <div class="circle circle1"></div>
-                <div class="circle circle2"></div>
-                <div class="circle circle3"></div>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="ourname">
+                 <h2>CozyShelf</h2>
+            </div>
+            <div class="nav">
+                <a href="#">HOME</a>
+                <a href="pages/dashboard.html">DASHBOARD</a>
+                <a href="pages/Book_listing.html">CATALOGUE</a>
+                <a href="pages/about.html" >ABOUT US</a>
+                <a href="pages/contact.html">CONTACT</a>
             </div>
         </div>
-        
-        <div class="search-bar">
-            <select id="searchCategory">
-                <option>All</option>
-                <option>Author</option>
-                <option>Title</option>
-                <option>Genre</option>
-            </select>
-            <input type="text" id="searchInput" placeholder="Search">
-            <button id="searchBtn"><i class="fas fa-search"></i></button>
-        </div>
-    </div>
-
-    <section class="trending-books-section">
-        <h2>Trending Books</h2>
-        <div class="slider-container">
-            <button id="prevBtn" class="nav-btn">&#10094;</button>
-            <div id="book-slider" class="books-container">
-               
+        <section class="hero">
+            <div class="content">
+                <div class="details">
+                    <h2 class="title">Readers are leaders</h2>
+                    <h3 class="subtitle">Start your day with reading</h3>
+                    <p class="quote">The more that you read, the more things you will 
+                        know. the more that you learn, the more places you'll go </p>
+                    <div class="buttons">
+                        <a href="pages/login.html" class="sign-up">Sign-In</a>
+                        <a href="pages/signup.html" class="Sign-in">Sign-Up</a>
+                    </div>    
+                </div>
+                <div class="image">
+                    <img src="images/removedhero.png" alt="logo">
+                </div>
             </div>
-            <button id="nextBtn" class="nav-btn">&#10095;</button>
-        </div>
-    </section>
+        </section>
 
-    <script src="js/home.js"></script>
-    <script src="js/adminDashboard.js"></script>
-    <script src="js/DisplayDescription.js"></script>
-</body>
+    </body>
 </html>

@@ -1,67 +1,77 @@
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>profile</title>
-    <a href="dashboard.html" class="back-button">&#8592; Back</a><br><br>
-    <link href="../css/account.css" rel="stylesheet" type="text/css" />
-
-    <h2>My Account</h2>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="/css/account.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-<img id="profilePic" src="download (4).jpeg"><br>
-<input type="file" id="profilePicInput" accept="image/*"><br><br>
-<form>
-    <div>
-        <label for="fn">First name :</label>
-
-        <input type="text" id="fn">
-        <label for="ln">last name :</label>
-        <input type="text" id ="ln">
-    </div><br>
-    <div>
-        <label for="phone" >Phone Number :</label>
-        <input id="phone" type="text" minlength="11" maxlength="15" placeholder="ex.0201100000000">
-
-
-    </div><br>
-    <div>
-        <div>
-            <label for="email" >Email :</label>
-            <input id="email" type="email"placeholder="example@gmail.com">
-
-
-        </div><br>
-
-        <div>
-            <label for="nid">National ID :</label>
-            <input type="text" id="nid" maxlength="14" placeholder="max 14 number">
-        </div><br>
-        <div>
-            <label for="g">Gender</label>
-            <select id="g" name="Gender">
-                <option value="" disabled selected>Choose</option>
-                <option value="Male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </div><br>
-        <div>
-            <label for="age">Age :</label>
-
-            <input type="number"minlength="14" maxlength="70" id="age">
-
-        </div><br>
-        <div>
-            <input type="submit" value=" Update">
-
-        </div><br>
+    <a href="dashboard.html" class="back-button">&#8592; Back</a>
+    <h2>My Account</h2>
+    
+    <div class="profile-container">
+        <div class="profile-pic-container">
+            <img id="profilePic" src="/images/profile.png" alt="Profile Picture">
+            <label for="profilePicInput" class="upload-btn">
+                <i class="fas fa-camera"></i> Change Photo
+            </label>
+            <input type="file" id="profilePicInput" accept="image/*">
+        </div>
+        
+        <form id="profileForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fn">First Name:</label>
+                    <input type="text" id="fn" required>
+                </div>
+                <div class="form-group">
+                    <label for="ln">Last Name:</label>
+                    <input type="text" id="ln" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input id="phone" type="tel" minlength="11" maxlength="15" placeholder="ex. 0201100000000" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" type="email" placeholder="example@gmail.com" required readonly>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nid">National ID:</label>
+                    <input type="text" id="nid" maxlength="14" placeholder="14 digit number">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" min="14" max="120">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="g">Gender:</label>
+                <select id="g" name="Gender">
+                    <option value="" disabled selected>Choose</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="update-btn">
+                    <i class="fas fa-save"></i> Update Profile
+                </button>
+            </div>
+        </form>
     </div>
 
-</form>
-<script src="../js/storage.js"></script>
-<script src="../js/account.js"></script>
-
+    <script src="/js/storage.js"></script>
+    <script src="/js/account.js"></script>
 </body>
-
 </html>

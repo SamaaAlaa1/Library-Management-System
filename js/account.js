@@ -1,40 +1,60 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) return;
-
-    const profileData = JSON.parse(localStorage.getItem(`profile_${currentUser.username}`)) || {};
-
-    document.getElementById("fn").value = profileData.firstName || "";
-    document.getElementById("ln").value = profileData.lastName || "";
-    document.getElementById("phone").value = profileData.phone || "";
-    document.getElementById("email").value = profileData.email || "";
-    document.getElementById("nid").value = profileData.nid || "";
-    document.getElementById("g").value = profileData.gender || "";
-    document.getElementById("age").value = profileData.age || "";
-
-    if (profileData.image) {
-        const img = document.querySelector("img");
-        img.src = profileData.image;
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        alert('Please login to view your profile');
+        window.location.href = '/login.html';
+        return;
     }
+    populateUserData(currentUser);
 
-    const form = document.querySelector("form");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const data = {
-            firstName: document.getElementById("fn").value,
-            lastName: document.getElementById("ln").value,
-            phone: document.getElementById("phone").value,
-            email: document.getElementById("email").value,
-            nid: document.getElementById("nid").value,
-            gender: document.getElementById("g").value,
-            age: document.getElementById("age").value,
-            image: document.querySelector("img").src
-        };
-
-        localStorage.setItem(`profile_${currentUser.username}`, JSON.stringify(data));
-        alert("Profile updated successfully!");
-    });
+    setupEventListeners(currentUser);
 });
 
+function populateUserData(user) {
+    document.getElementById('fn').value = user.firstName || '';
+    document.getElementById('ln').value = user.lastName || '';
+    document.getElementById('email').value = user.email || '';
+    document.getElementById('phone').value = user.phone || '';
+    document.getElementById('nid').value = user.nationalId || '';
+    document.getElementById('age').value = user.age || '';
+
+    if (user.gender) {
+        document.getElementById('g').value = user.gender;
+    }
+
+    if (user.profilePic) {
+        document.getElementById('profilePic').src = user.profilePic;
+    }
+}
+
+function setupEventListeners(user) {
+    document.getElementById('profilePicInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('profilePic').src = event.target.result;
+                user.profilePic = event.target.result;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const updatedUser = {
+            ...user,
+            firstName: document.getElementById('fn').value.trim(),
+            lastName: document.getElementById('ln').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            nationalId: document.getElementById('nid').value.trim(),
+            age: document.getElementById('age').value.trim(),
+            gender: document.getElementById('g').value
+        };
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+
+        alert('Profile updated successfully!');
+    });
+}
 

@@ -3,44 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Book Management</title>
+    <title>Admin Dashboard - Library Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/adminDahsboard.css">
+    <link rel="stylesheet" href="/css/adminDahsboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
         <div class="navbar-brand">Library Admin</div>
         <div class="navbar-links">
-            <a href="../index.html">HOME</a>
-            <a href="dashboard.html">DASHBOARD</a>
+            <a href="/index.html">HOME</a>
+            <a href="dashboard.html" class="active">DASHBOARD</a>
             <a href="Book_listing.html">CATALOGUE</a>
-            <a href="About.html">ABOUT US</a>
-            <a href="Contact.html">CONTACT</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
             <a href="login.html">LOGOUT</a>
         </div>
     </div>
-    <div class="container">
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Book Management</h1>
-            <button class="btn btn-primary" id="addBookBtn">
-                <i class="fas fa-plus"></i> Add New Book
-            </button>
+
+    <div class="admin-container">
+        <div class="admin-sidebar">
+            <div class="admin-menu">
+                <button class="menu-btn active" data-target="books-section">
+                    <i class="fas fa-book"></i> Books Management
+                </button>
+                <button class="menu-btn" data-target="messages-section">
+                    <i class="fas fa-envelope"></i> Contact Messages
+                </button>
+                <button class="menu-btn" data-target="users-section">
+                    <i class="fas fa-users"></i> Users Management
+                </button>
+            </div>
         </div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cover</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="booksTableBody">
-                </tbody>
-            </table>
+
+        <div class="admin-content">
+            <div id="books-section" class="content-section active">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Book Management</h1>
+                    <button class="btn btn-primary" id="addBookBtn">
+                        <i class="fas fa-plus"></i> Add New Book
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cover</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Genre</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="messages-section" class="content-section">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Contact Messages</h1>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messagesTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="users-section" class="content-section">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Users Management</h1>
+                    <button class="btn btn-primary" id="addUserBtn">
+                        <i class="fas fa-plus"></i> Add New User
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -128,6 +194,120 @@
             </form>
         </div>
     </div>
-    <script src="../js/adminDashboard.js" defer></script>
+
+    <div class="modal" id="viewMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Message Details</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="message-details">
+                <div class="detail-row">
+                    <span class="detail-label">From:</span>
+                    <span class="detail-value" id="viewMessageName"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value" id="viewMessageEmail"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" id="viewMessageDate"></span>
+                </div>
+                <div class="detail-row full-width">
+                    <span class="detail-label">Message:</span>
+                    <p class="detail-value" id="viewMessageContent"></p>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-danger" id="deleteMessageBtn">Delete Message</button>
+                <button type="button" class="btn" id="closeMessageBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New User</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" class="form-control">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancelAddUserBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit User</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="editUserForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label for="editUserName">Full Name*</label>
+                    <input type="text" id="editUserName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserEmail">Email*</label>
+                    <input type="email" id="editUserEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserPhone">Phone Number</label>
+                    <input type="tel" id="editUserPhone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editUserAddress">Address</label>
+                    <textarea id="editUserAddress" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editUserRole">Role*</label>
+                    <select id="editUserRole" class="form-control" required>
+                        <option value="user">User</option>
+                        <option value="librarian">Librarian</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editUserStatus">Status*</label>
+                    <select id="editUserStatus" class="form-control" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEditUserBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/adminDashboard.js"></script>
 </body>
 </html>
