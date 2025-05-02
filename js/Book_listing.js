@@ -11,6 +11,22 @@ function displaybooks(page = 1) {
     booksToDisplay.forEach(book => {
         const bookDiv = document.createElement("div");
         bookDiv.className = "Book-Grid";
+        const heartIcon = document.createElement("i");
+        heartIcon.className= "fas fa-heart";
+        heartIcon.style.color="white";
+        heartIcon.style.border="2px solid white";
+        heartIcon.style.borderRadius= "50%";
+        heartIcon.style.margin="10px";
+        heartIcon.style.fontSize="18px";
+        heartIcon.style.cursor="pointer";
+
+        heartIcon.onclick = function(){
+            if(heartIcon.style.color == "red"){
+                heartIcon.style.color = "white";
+            }else{
+                heartIcon.style.color = "red";
+            }
+        };
 
         const img = document.createElement("img");
         img.src = book.image;
@@ -25,6 +41,7 @@ function displaybooks(page = 1) {
         button.disabled = book.isBorrowed;
 
         bookDiv.appendChild(img);
+        bookDiv.appendChild(heartIcon);
         bookDiv.appendChild(button);
         container.appendChild(bookDiv);
     });
