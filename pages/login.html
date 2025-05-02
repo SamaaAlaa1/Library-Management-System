@@ -5,25 +5,29 @@
   <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-<div id="login-container">
-  <h3 id="welcome">Welcome to WEBSITE</h3>
-  <form action="#" method="post" id="login-form">
-    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+  <div class="background">
+    <div class="glass-box">
+    <div id="login-container">
+      <h3 id="welcome">Welcome to WEBSITE</h3>
+      <form action="#" method="post" id="login-form">
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-    <a href="#" id="forgot">Forgot your password?</a>
+        <a href="#" id="forgot">Forgot your password?</a>
 
-    <div id="rem">
-      <input type="checkbox" id="remember" name="remember">
-      <label for="remember">Remember me</label>
+        <div id="rem">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">Remember me</label>
+        </div>
+
+        <div id="buttons">
+          <button type="submit" id="login">Login</button>
+        </div>
+
+        <p id="noacc">Don't have an account? <a href="signup.html">Sign up now</a></p>
+      </form>
     </div>
-
-    <div id="buttons">
-      <button type="submit" id="login">Login</button>
-    </div>
-
-    <p id="noacc">Don't have an account? <a href="signup.html">Sign up now</a></p>
-  </form>
+</div>
 </div>
 <script src="/js/storage.js"></script>
 <script src="/js/login.js" ></script>
