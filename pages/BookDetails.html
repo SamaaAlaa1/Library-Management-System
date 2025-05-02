@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <link href="/css/BookDetails.css" rel="stylesheet" type="text/css" />
-    <div class="head">
-        <!-- <a href="Book_listing.html">
-            <img src="../images/left-arrow.png" alt="arrow" >
-            </a> -->
-        <a href="/index.html">HOME</a>
-        <a href="dashboard.html">DASHBOARD</a>
-        <a href="Book_listing.html">CATALOGUE</a>
-        <a href="About.html">ABOUT US</a>
-        <a href="Contact.html">CONTACT</a>
-    </div>
-   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details | CozyShelf</title>
+    <link rel="stylesheet" href="/css/BookDetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
+    <nav class="navbar">
+        <div class="ourname">
+            <h2>CozyShelf</h2>
+        </div>
+        <div class="nav">
+            <a href="/index.html">HOME</a>
+            <a href="dashboard.html">DASHBOARD</a>
+            <a href="Book_listing.html">CATALOGUE</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
 
-
-</p>
-<div class="book-container">
-    <img id ="bookimg" src="books.png">
-    <div class="book-info">
-        <h2 id="booktitle"></h2>
-        <div class="Author">
-        <p><strong>Author :</strong> </p>
-        <p id="authorname"></p>
+    <div class="back-btn" id="backButton">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Catalogue</span>
     </div>
-    <div class="gen">
-        <p><strong>Genere :</strong></p>
-        <p id="genere"></p>
+
+    <div class="book-container">
+        <div class="book-cover">
+            <img id="bookImage" src="/Images/book-placeholder.jpg" alt="Book Cover">
+        </div>
+
+        <div class="book-info">
+            <h1 id="bookTitle">Book Title</h1>
+            <div class="book-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Author:</span>
+                    <span id="bookAuthor">Author Name</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Genre:</span>
+                    <span id="bookGenre">Genre</span>
+                </div>
+            </div>
+
+            <div class="book-description">
+                <h2>Description</h2>
+                <p id="bookDescription">Loading book description...</p>
+            </div>
+        </div>
     </div>
-       
-       
-    </div>
-</div><br>
-<div class="BOOK-DESCRIPTION">
-
-    <h1>DESCRIPTION</h1><br><br>
-    <p id="bookdetails"></p>
-       
-</div>
-
-
-
-
-<script src="/js/DisplayDescription.js"></script>
+    <script src="/js/DisplayDescription.js"></script>
 </body>
-
 </html>

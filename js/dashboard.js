@@ -215,6 +215,7 @@ function toggleFavorite(bookId, button) {
   
   if (!currentUser) {
     alert('Please login first to add books to your favorites!'); 
+    window.location.href = '/pages/login.html';
     return;
   }
 
