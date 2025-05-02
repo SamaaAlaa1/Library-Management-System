@@ -9,31 +9,37 @@ body {
   background-color: #f5f5f5;
 }
 
-.navbar {
+.navbar{
+  position: fixed;
+  width: 100%;
+  z-index: 5;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  padding: 15px 40px;
-  background-color: #65081F;
-  gap: 20px;
+  background: #65081F;   
+  padding: 20px; 
 }
-
-.navbar a {
+.nav{
+  display: flex;
+  gap: 30px;
+ 
+}
+.nav a{
   color: white;
   text-decoration: none;
   font-size: 18px;
-  font-weight: 500;
-  transition: color 0.3s;
+  padding: 10px 18px;
+  
+  border-radius: 20px;
+  transition: 0.3s ease;
 }
+.nav a:hover{
+  color: black;
+  background: #FFC048;
 
-.navbar a:hover {
-  color: #FFA500;
-}
-
-.navbar a.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 8px 12px;
-  border-radius: 4px;
+} 
+.ourname{
+  color:white;
 }
 
 .user-welcome {
