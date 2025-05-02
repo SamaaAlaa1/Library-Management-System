@@ -92,6 +92,15 @@ body{
     color: black;
     font-size: 33px
 }
+.buttons .account{
+    border: 2px solid black;
+    padding: 15px 26px;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #FFC048;
+    color: black;
+    font-size: 33px
+}
 .buttons .sign-in{
     padding: 15px 26px;
     border-radius: 25px;
@@ -102,6 +111,16 @@ body{
     border-color: white;
     background: transparent;
 }
+.buttons .logout{
+    padding: 15px 26px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    font-size: 33px;
+    border:2px solid white ;
+    border-color: white;
+    background: transparent;    
+}
 .sign-in:hover{
     border-color: black;
     color:black;
@@ -111,4 +130,14 @@ body{
     border-color: white;
     color: white;
     background-color: transparent;
+}
+.account:hover{
+    border-color: white;
+    color: white;
+    background-color: transparent;
+}
+.logout:hover{
+    border-color: black;
+    color:black;
+    background-color: #FFC048;
 }
