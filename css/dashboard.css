@@ -7,10 +7,12 @@
 
 body {
   background-color: #f5f5f5;
+  padding-top: 80px; /* Added padding to prevent content from being hidden under navbar */
 }
 
-.navbar{
+.navbar {
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 5;
   display: flex;
@@ -19,35 +21,36 @@ body {
   background: #65081F;   
   padding: 20px; 
 }
-.nav{
+
+.nav {
   display: flex;
   gap: 30px;
- 
 }
-.nav a{
+
+.nav a {
   color: white;
   text-decoration: none;
   font-size: 18px;
   padding: 10px 18px;
-  
   border-radius: 20px;
   transition: 0.3s ease;
 }
-.nav a:hover{
+
+.nav a:hover {
   color: black;
   background: #FFC048;
-
 } 
-.ourname{
-  color:white;
+
+.ourname {
+  color: white;
 }
 
 .user-welcome {
   text-align: center;
-  /* margin: 20px 0; */
   padding: 20px;
   background-color: #65081F;
   color: white;
+  /* margin-top: 20px; Ensure it appears below navbar */
 }
 
 .user-welcome h1 {
@@ -340,6 +343,42 @@ body {
   text-align: center;
   color: #7f8c8d;
   padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .slider-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .slider-nav.prev {
+    left: -40px;
+  }
+  
+  .slider-nav.next {
+    right: -40px;
+  }
+  
+  .book-details-content {
+    flex-direction: column;
+  }
+  
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  .book-modal-cover {
+    width: 150px;
+    height: 225px;
+  }
 }
 
 @media (max-width: 768px) {

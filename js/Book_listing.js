@@ -17,7 +17,7 @@ function displaybooks(page = 1, booksToDisplay = null) {
   const books =
     booksToDisplay || JSON.parse(localStorage.getItem("books")) || [];
   const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-  const booksPerPage = 9;
+  const booksPerPage = 12;
   const start = (page - 1) * booksPerPage;
   const end = start + booksPerPage;
   const paginatedBooks = books.slice(start, end);

@@ -25,12 +25,94 @@ function saveUsers(users) {
 }
 
 function initDashboard() {
-  localStorage.clear();
+    // localStorage.clear();
+
   if (getBooks().length === 0) {
-    localStorage.clear();
+    // localStorage.clear();
     const sampleBooks = [
       {
         id: 1,
+        title: "Harry Potter and the Goblet of Fire",
+        author: "J.K. Rowling",
+        genre: "Dystopian Fiction",
+        description: "Lord Voldemort, the dark wizard responsible for the deaths of Harry's parents, is growing stronger. At the Quidditch World Cup, Voldemort's signature Dark Mark appears in the sky over the stadium, causing pandemonium",
+        image: "/images/book14.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 2,
+        title: "1984 by George Orwell",
+        author: "Harper Lee",
+        genre: "Dystopian Fiction",
+        description: " A classic novel about a totalitarian regime and thought control.",
+        image: "/images/book6.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 3,
+        title: "The Hobbit by J.R.R. Tolkien",
+        author: "Jane Austen",
+        genre: "Fantasy",
+        description: "Bilbo Baggins' adventure with dwarves and a dragon.",
+        image: "/images/book7.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 4,
+        title: "Pride and Prejudice by Jane Austen",
+        author: "George Orwell",
+        genre: "Classic Romance",
+        description: "The romantic tensions between Elizabeth Bennet and Mr. Darcy.",
+        image: "/images/book8.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 5,
+        title: "The Alchemist by Paulo Coelho",
+        author: "William Gibson",
+        genre: "Inspirational Fiction",
+        description: "A shepherd's journey to find worldly treasure.",
+        image: "/images/book9.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 6,
+        title: "The Silent Patient by Alex Michaelide",
+        author: "Gillian Flynn",
+        genre: "Psychological Thriller",
+        description: "A woman shoots her husband and then stops speaking.",
+        image: "/images/book10.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 7,
+        title: "Infernal Devices",
+        author: "James Clear",
+        genre: "Self-Help",
+        description: "A guide to building good habits and breaking bad ones with tiny changes.",
+        image: "/images/book11.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 8,
+        title: "The Night Circus",
+        author: "Erin Morgenstern",
+        genre: "Self-Help",
+        description: "A mysterious competition between two young magicians unfolds within a magical black-and-white circus.",
+        image: "/images/book12.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 9,
+        title: "Circe",
+        author: "Madeline Miller",
+        genre: "Mythological Fiction",
+        description: "A retelling of the life of Circe, the witch from Homer's Odyssey.",
+        image: "/images/book13.jpg",
+        isBorrowed: false,
+      },
+      {
+        id: 10,
         title: "The Great Gatsby",
         author: "F. Scott Fitzgerald",
         genre: "Classic",
@@ -39,7 +121,7 @@ function initDashboard() {
         isBorrowed: false,
       },
       {
-        id: 2,
+        id: 11,
         title: "To Kill a Mockingbird",
         author: "Harper Lee",
         genre: "Literary Fiction",
@@ -48,7 +130,7 @@ function initDashboard() {
         isBorrowed: false,
       },
       {
-        id: 3,
+        id: 12,
         title: "Dune",
         author: "Frank Herbert",
         genre: "Science Fiction",
@@ -57,7 +139,7 @@ function initDashboard() {
         isBorrowed: false,
       },
       {
-        id: 4,
+        id: 13,
         title: "The Hobbit",
         author: "J.R.R. Tolkien",
         genre: "Fantasy",
@@ -66,14 +148,16 @@ function initDashboard() {
         isBorrowed: false,
       },
       {
-        id: 5,
+        id: 14,
         title: "Atomic Habits",
         author: "James Clear",
         genre: "Self-Help",
         description: "A guide to building good habits and breaking bad ones with tiny changes.",
         image: "/images/book5.jfif",
         isBorrowed: false,
-      }
+      },
+      
+      
     ];
     saveBooks(sampleBooks);
   }
@@ -202,14 +286,24 @@ function renderUsersTable() {
   const tableBody = document.getElementById("usersTableBody");
   tableBody.innerHTML = "";
 
-  users.forEach((user) => {
+  if (users.length === 0) {
     const row = document.createElement("tr");
+    row.innerHTML = `<td colspan="6" style="text-align: center;">No users found</td>`;
+    tableBody.appendChild(row);
+    return;
+  }
+
+  users.forEach((user, index) => {
+    const row = document.createElement("tr");
+    const role = user.role || 'user'; 
+    const status = user.status || 'active'; 
+    
     row.innerHTML = `
-      <td>${user.id}</td>
-      <td>${user.name}</td>
-      <td>${user.email}</td>
-      <td>${user.role.charAt(0).toUpperCase() + user.role.slice(1)}</td>
-      <td class="status-${user.status}">${user.status.charAt(0).toUpperCase() + user.status.slice(1)}</td>
+      <td>${index+1}</td>
+      <td>${user.name || ''}</td>
+      <td>${user.email || ''}</td>
+      <td>${role.charAt(0).toUpperCase() + role.slice(1)}</td>
+      <td class="status-${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</td>
       <td>
           <div class="action-buttons">
               <button class="action-btn btn-warning edit-user-btn" data-id="${user.id}">

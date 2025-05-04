@@ -1,4 +1,4 @@
-const booksPerPage = 6;
+const booksPerPage = 12;
 let currentPage = 1;
 
 function getBooks() {
@@ -61,4 +61,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const books = getBooks();
     renderBooks(books, currentPage);
     setupPagination(books);
+    setupSearch();
 });
